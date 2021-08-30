@@ -1,0 +1,37 @@
+#timer{
+    display:flex;
+    justify-content: flex-end;
+    
+}
+#high-score{
+    display: flex;
+    justify-content: flex-start;
+    
+}
+
+h1{
+    display:flex;
+    justify-content: center;
+   
+}
+
+body{
+    margin:20px;
+}
+
+.intro{
+    display: flex;
+    justify-content: center;
+}
+
+button{
+  background-color: rgb(90, 3, 90);
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 20px 35px;
+  text-align: center;
+  margin:  auto;
+  display: block;
+}
