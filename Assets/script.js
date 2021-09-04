@@ -4,7 +4,8 @@ var highScore = document.getElementById('high-score')
 var scoreCounter = 0
 var timeLeft = 60;
 var timerEl = document.getElementById('timer');
-var startEl = document.getElementById('start')
+var startEl = document.getElementById('start');
+var quizOverEl = document.querySelectorAll('.quiz-over');
 var quizQuestions = [ {
 
     question:'Where do the <script> tags go in the HTML file?',
@@ -20,16 +21,16 @@ var quizQuestions = [ {
     correctAnswer: 'confirm("Do you want to play?"',
    },
    { question:'How do you write a function',
-     possibleAnswers: ['A: function exampleFunction()','B: function = exampleFunction()','C: function: exampleFunction()'],
+     possibleAnswers: ['function exampleFunction()','function = exampleFunction()','function: exampleFunction()'],
      correctAnswer: 'function exampleFunction()',
    },
-   { question:'?',
-     possibleAnswers: ['','','','',],
-     correctAnswer: '',
+   { question:'Which of the following takes precedence over the other if the variable names are the same?',
+     possibleAnswers: ['local variable','global variable','both','neither',],
+     correctAnswer: 'global variable',
    },
-   { question:'?2',
-     possibleAnswers: ['','','','',],
-     correctAnswer: '',
+   { question:'Which of the following is the correct way to write an if statement?',
+     possibleAnswers: ['if i == 5 then','if (i=5)then ','if(i===5)'],
+     correctAnswer: 'if(i===5)',
    },
 ]
 
@@ -102,8 +103,11 @@ function quizOver(){
     // restart the quiz
     // header enter name, button to save score,text box to enter name, button to restart
     // create a div called quiz for all the quiz and set the display to none and set quiz over div display inline
-
+   
+    quizOverEl.style.display ='block';
+    startQuiz();
 }
+quizOver();
 
 
 

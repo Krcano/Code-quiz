@@ -24,7 +24,7 @@ body{
     justify-content: center;
 }
 
-button{
+#start{
   background-color: rgb(90, 3, 90);
   border-radius: 8px;
   color: white;
@@ -34,5 +34,22 @@ button{
   text-align: center;
   margin:  auto;
   display: block;
+}
+button{
+  cursor: pointer;
+  font-size: 15px;
+  text-align: center;
+  margin:  auto;
+  display: block;
+  padding: 15px 30px;
+  background-color: transparent;
+  border-color: rgb(90, 3, 90);
+}
+button:hover{
+    background-color: rgb(90, 3, 90);
+    color: white;
+}
+.quiz-over{
+    display: none;
 }
 
