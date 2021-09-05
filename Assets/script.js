@@ -91,31 +91,27 @@ for(var i=0; i < question.possibleAnswers.length; i++) {
 }
 
 currentQuestion++;
-    if(timeLeft <= 0 || currentQuestion > quizQuestions.length){
+    if(timeLeft <= 0 || currentQuestion === quizQuestions.length){
         timeLeft = 60;
         currentQuestion = 0;
         quizOver();
+       
     }
 } 
 
 function quizOver(){
-    var boxEl = document.querySelectorAll('.box')
-    // get the user name 
-    // give option to save score
-    // restart the quiz
-    // header enter name, button to save score,text box to enter name, button to restart
-    // create a div called quiz for all the quiz and set the display to none and set quiz over div display inline
-   if(quizOverEl.style.display === 'none') {
-    boxEl.style.display ='none';
-    quizOverEl.style.display ='block';
-} 
-   
-    
-}
+    isHidden = quizOverEl.hidden;
+    if(isHidden === true){
+        quizOverEl.style.display = 'block';
+    } else{
+
+    }
+    console.log(quizOver)
+} quizOver();
 
 
 
-
+var grade = localStorage.getItem('scoreCount');
 
 // update correct answer/score count
 function setScore(){
@@ -127,14 +123,14 @@ setScore();
 
 
 // get score from client sotrage if it exists
-// function correctAnswerCounter() {
-//     var storedCorrect = localStorage.getItem('scoreCount');
-//     if(storedCorrect === null){
-//         scoreCounter=0;
-//     } else{
-//         scoreCounter= storedCorrect;
-//     }
-// }
+function correctAnswerCounter() {
+    var storedCorrect = localStorage.getItem('scoreCount');
+    if(storedCorrect === null){
+        scoreCounter=0;
+    } else{
+        scoreCounter= storedCorrect;
+    }
+}
 
 
 
@@ -155,4 +151,8 @@ adding objects to arrays and adding data to an object with a key of score name*/
 //     score: scoreCounter,
 
 // })
-
+// get the user name 
+    // give option to save score
+    // restart the quiz
+    // header enter name, button to save score,text box to enter name, button to restart
+    // create a div called quiz for all the quiz and set the display to none and set quiz over div display inline
