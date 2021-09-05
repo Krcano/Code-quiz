@@ -5,7 +5,7 @@ var scoreCounter = 0
 var timeLeft = 60;
 var timerEl = document.getElementById('timer');
 var startEl = document.getElementById('start');
-var quizOverEl = document.querySelectorAll('.quiz-over');
+var quizOverEl = document.querySelector('#quiz-content')
 var quizQuestions = [ {
 
     question:'Where do the <script> tags go in the HTML file?',
@@ -71,19 +71,20 @@ var question = quizQuestions[currentQuestion];
 var questionName= document.createElement('h1');
 questionName.textContent= question.question;
 questionsBox.appendChild(questionName);
+console.log(question.question);
 
 for(var i=0; i < question.possibleAnswers.length; i++) {
     var questionAnswer = document.createElement('button');
     questionAnswer.addEventListener('click', function(){
         if(question.correctAnswer === this.textContent){
             console.log(true);
-            scoreCounter++
+            scoreCounter++;
         } else{ timeLeft-=10
 
         }
         console.log(this.textContent)
         startQuiz();
-    })
+    } )
 
     questionAnswer.textContent = question.possibleAnswers[i];
     questionsBox.appendChild(questionAnswer);
@@ -95,19 +96,23 @@ currentQuestion++;
         currentQuestion = 0;
         quizOver();
     }
-}
+} 
 
 function quizOver(){
+    var boxEl = document.querySelectorAll('.box')
     // get the user name 
     // give option to save score
     // restart the quiz
     // header enter name, button to save score,text box to enter name, button to restart
     // create a div called quiz for all the quiz and set the display to none and set quiz over div display inline
-   
+   if(quizOverEl.style.display === 'none') {
+    boxEl.style.display ='none';
     quizOverEl.style.display ='block';
-    startQuiz();
+} 
+   
+    
 }
-quizOver();
+
 
 
 
@@ -117,18 +122,19 @@ function setScore(){
     highScore.textContent = scoreCounter;
     localStorage.setItem('scoreCount', scoreCounter);
 }
+setScore();
 
 
 
 // get score from client sotrage if it exists
-function correctAnswerCounter() {
-    var storedCorrect = localStorage.getItem('scoreCount');
-    if(storedCorrect === null){
-        scoreCounter=0;
-    } else{
-        scoreCounter= storedCorrect;
-    }
-}
+// function correctAnswerCounter() {
+//     var storedCorrect = localStorage.getItem('scoreCount');
+//     if(storedCorrect === null){
+//         scoreCounter=0;
+//     } else{
+//         scoreCounter= storedCorrect;
+//     }
+// }
 
 
 
