@@ -11,8 +11,8 @@ var quizQuestions = [ {
     question:'Where do the <script> tags go in the HTML file?',
     possibleAnswers: ['In the head','In the body','neither','Both',],
     correctAnswer: 'In the body',
-},
-{   question:'what is the proper way to refer to an external script?',
+   },
+   { question:'what is the proper way to refer to an external script?',
     possibleAnswers: [ '<script href ="***.js"','<script rel="***.js"','<script src="***.js'],
     correctAnswer: '<script src="***.js"',
    },
@@ -93,23 +93,22 @@ for(var i=0; i < question.possibleAnswers.length; i++) {
 currentQuestion++;
     if(timeLeft <= 0 || currentQuestion === quizQuestions.length){
         timeLeft = 60;
-        currentQuestion = 0;
+        // currentQuestion = 0; caused a nonstop quiz
         quizOver();
        
     }
 } 
-
+// showing end of quiz content
 function quizOver(){
     isHidden = quizOverEl.hidden;
     if(isHidden === true){
         quizOverEl.style.display = 'block';
     }
     
-} quizOver();
+}
 
 
-
-var grade = localStorage.getItem('scoreCount');
+// var grade = localStorage.getItem('scoreCount');
 
 // update correct answer/score count
 function setScore(){
