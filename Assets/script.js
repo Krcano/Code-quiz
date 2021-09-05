@@ -5,7 +5,7 @@ var scoreCounter = 0
 var timeLeft = 60;
 var timerEl = document.getElementById('timer');
 var startEl = document.getElementById('start');
-var quizOverEl = document.querySelector('#quiz-content')
+var quizOverEl = document.querySelectorAll('#quiz-content')
 var quizQuestions = [ {
 
     question:'Where do the <script> tags go in the HTML file?',
@@ -103,10 +103,8 @@ function quizOver(){
     isHidden = quizOverEl.hidden;
     if(isHidden === true){
         quizOverEl.style.display = 'block';
-    } else{
-
     }
-    console.log(quizOver)
+    
 } quizOver();
 
 
