@@ -1,3 +1,6 @@
+:root{
+    --button-color:rgb(90, 3, 90) ;
+}
 #timer{
     display:flex;
     justify-content: flex-end;
@@ -5,8 +8,8 @@
 }
 #high-score{
     display: flex;
-    justify-content: flex-start;
-    
+    color:var(--button-color);
+  
 }
 
 h1{
@@ -25,12 +28,12 @@ p{
 }
 
 #start{
-  background-color: rgb(90, 3, 90);
+  background-color: var(--button-color);
   border-radius: 8px;
   color: white;
   cursor: pointer;
   font-size: 15px;
-  padding: 15px 30px;
+  padding: 10px 15px;
   text-align: center;
   margin:  auto;
   display: block;
@@ -41,12 +44,14 @@ button{
   text-align: center;
   margin:  auto;
   display: block;
-  padding: 15px 30px;
+  padding: 15px 20px;
   background-color: transparent;
-  border-color: rgb(90, 3, 90);
+  border-color: var(--button-color);
+  margin-top: 10px;
 }
+
 button:hover{
-    background-color: rgb(90, 3, 90);
+    background-color: var(--button-color);
     color: white;
 }
 #quiz-content{
@@ -54,18 +59,29 @@ button:hover{
     text-align:center;
     margin: auto;
    margin-top: 10px;
-    
 }
+
 #restart-button{
-  background-color: rgb(90, 3, 90);
+  background-color:var(--button-color);
   border-radius: 8px;
   color: white;
   cursor: pointer;
   font-size: 15px;
-  padding: 15px 20px;
+  padding: 10px 15px;
   text-align: center;
   margin:  auto;
   margin-top: 10px;
   display: none;
 }
-
+#save{
+    background-color: var(--button-color);
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 15px;
+    padding: 10px 15px;
+    text-align: center;
+    margin:  auto;
+    display: block;  
+    margin-top: 10px;
+}

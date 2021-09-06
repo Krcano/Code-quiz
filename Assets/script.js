@@ -6,6 +6,7 @@ var timeLeft = 60;
 var timerEl = document.getElementById('timer');
 var startEl = document.getElementById('start');
 var restartEl = document.getElementById('restart-button');
+var saveButton = document.getElementById('save');
 
 var quizQuestions = [ 
     {
@@ -14,12 +15,12 @@ var quizQuestions = [
     correctAnswer: 'In the body',
    },
    { question:'what is the proper way to refer to an external script?',
-    possibleAnswers: [ '<script href ="***.js"','<script rel="***.js"','<script src="***.js'],
+    possibleAnswers: [ '<script href ="***.js"','<script rel="***.js"','<script src="***.js"'],
     correctAnswer: '<script src="***.js"',
    },
    { question:'How would you write a "Do you want to play?" as confirm message ',
     possibleAnswers: ['msg("Do you want to play?")','confirm(Do you want to play?)','confirm("Do you want to play?")'],
-    correctAnswer: 'confirm("Do you want to play?"',
+    correctAnswer: 'confirm("Do you want to play?")',
    },
    { question:'How do you write a function',
      possibleAnswers: ['function exampleFunction()','function = exampleFunction()','function: exampleFunction()'],
@@ -64,11 +65,9 @@ var currentQuestion=0;
 function startQuiz() {
 
 var introBox = document.querySelector('.box');
+// hides intro content and start button
 introBox.style.display = 'none';
-
 startEl.style.display = 'none';
-
-
 
 
 // clears the previous question from page
@@ -84,7 +83,7 @@ for(var i=0; i < question.possibleAnswers.length; i++) {
     questionAnswer.addEventListener('click', function(){
         if(question.correctAnswer === this.textContent){
             console.log(true);
-            // scoreCounter++;
+            scoreCounter++;
         } else{ 
             timeLeft-=10;
         } 
@@ -105,50 +104,97 @@ for(var i=0; i < question.possibleAnswers.length; i++) {
 currentQuestion++;
     
 } 
+
 // showing end of quiz content
 var quizOverEl = document.querySelectorAll('#quiz-content');
-
 
 function quizOver(){
     document.getElementById('quiz-content').style.display = 'block';
     document.getElementById('question-box').style.display = 'none';
-    document.getElementById('restart-button').style.display = 'block';
+    // document.getElementById('restart-button').style.display = 'block'; DOESNT WORK
     
-    
-
 }
 
-
-// var grade = localStorage.getItem('scoreCount');
-
-// update correct answer/score count
-function setScore(){
-    highScore.textContent = scoreCounter;
-    localStorage.setItem('scoreCount', scoreCounter);
+// saves score to local storage
+function saveGrade(){
+var userName = document.getElementById('initials') ;
+var gradeScore = {
+    name: userName.value,
+    grade: scoreCounter,
+};
+window.localStorage.setItem('gradeScore', JSON.stringify(gradeScore));
 }
-setScore();
 
-
-
-// get score from client sotrage if it exists
-function correctAnswerCounter() {
-    var storedCorrect = localStorage.getItem('scoreCount');
-    if(storedCorrect === null){
-        scoreCounter=0;
+function renderGrade(){
+    var lastGrade = JSON.parse(localStorage.getItem('gradeScore'));
+    if(lastGrade !== null){
+        document.getElementById('initials').innerHTML = lastGrade.name;
+       
+        document.getElementById('highScore').innerHTML = lastGrade.grade;
+                       // causing and unknown error ^ 
     } else{
-        scoreCounter= storedCorrect;
+        return;
     }
-}
+    
+} console.log(JSON.parse(localStorage.getItem('gradeScore')));
 
 
 
+// restartEl.addEventListener('click', function(){
+//     startQuiz();
+// })
+saveButton.addEventListener('click', function(event){
+    event.preventDefault();
+   saveGrade();
+   renderGrade();
 
-// document.addEventListener('click', startQuiz);
+})
 startEl.addEventListener('click', function(){
     timer()
     startQuiz()
     
 });
+
+
+// function init(){
+//     renderGrade();
+// }
+// init();
+
+
+
+
+
+
+
+
+
+
+// function setScore(){
+//     highScore.textContent = scoreCounter;
+//     localStorage.setItem('scoreCount', scoreCounter);
+// }
+// setScore();
+
+
+
+
+
+// // get score from client sotrage if it exists
+// function correctAnswerCounter() {
+//     var storedCorrect = localStorage.getItem('scoreCount');
+//     if(storedCorrect === null){
+//         scoreCounter=0;
+//     } else{
+//         scoreCounter= storedCorrect;
+//     }
+// }
+
+
+
+
+// document.addEventListener('click', startQuiz);
+
 
 
 /*get all the high score out of all local storage if no high score se it to 0
