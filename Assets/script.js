@@ -5,9 +5,10 @@ var scoreCounter = 0
 var timeLeft = 60;
 var timerEl = document.getElementById('timer');
 var startEl = document.getElementById('start');
-var quizOverEl = document.querySelectorAll('#quiz-content')
-var quizQuestions = [ {
+var restartEl = document.getElementById('restart-button');
 
+var quizQuestions = [ 
+    {
     question:'Where do the <script> tags go in the HTML file?',
     possibleAnswers: ['In the head','In the body','neither','Both',],
     correctAnswer: 'In the body',
@@ -42,14 +43,16 @@ function timer(){
    
     var timeInterval = setInterval(function () {
 
-        if (timeLeft > 1) {
+        if (timeLeft >= 0) {
             timerEl.textContent = 'Time Left: ' + timeLeft + ' seconds';
             timeLeft --;
-        } else if ( timeLeft === 1) {
-            timerEl.textContent = 'Time Left: ' + timeLeft + ' second';
-         } else{ timerEl.textContent = ' ';
-        clearInterval(timeInterval);
-    }
+        } 
+
+        if ( timeLeft < 0) {
+            clearInterval(timeInterval);
+            timer=60;
+         }
+         
     }, 1000);
 
     
@@ -59,11 +62,14 @@ var currentQuestion=0;
 
 // Start quiz function
 function startQuiz() {
-console.log('startQuiz');
-// introBox.innerHTML ='';
 
-// prevents starts button from messing with the timer mid quiz
-startEl.disabled = true;
+var introBox = document.querySelector('.box');
+introBox.style.display = 'none';
+
+startEl.style.display = 'none';
+
+
+
 
 // clears the previous question from page
 questionsBox.innerHTML ='';
@@ -78,12 +84,18 @@ for(var i=0; i < question.possibleAnswers.length; i++) {
     questionAnswer.addEventListener('click', function(){
         if(question.correctAnswer === this.textContent){
             console.log(true);
-            scoreCounter++;
-        } else{ timeLeft-=10
-
+            // scoreCounter++;
+        } else{ 
+            timeLeft-=10;
+        } 
+        
+        if(currentQuestion < quizQuestions.length){
+            startQuiz();
+        }else{
+            quizOver();
         }
-        console.log(this.textContent)
-        startQuiz();
+        // console.log(this.textContent)
+        
     } )
 
     questionAnswer.textContent = question.possibleAnswers[i];
@@ -91,20 +103,19 @@ for(var i=0; i < question.possibleAnswers.length; i++) {
 }
 
 currentQuestion++;
-    if(timeLeft <= 0 || currentQuestion === quizQuestions.length){
-        timeLeft = 60;
-        // currentQuestion = 0; caused a nonstop quiz
-        quizOver();
-       
-    }
+    
 } 
 // showing end of quiz content
+var quizOverEl = document.querySelectorAll('#quiz-content');
+
+
 function quizOver(){
-    isHidden = quizOverEl.hidden;
-    if(isHidden === true){
-        quizOverEl.style.display = 'block';
-    }
+    document.getElementById('quiz-content').style.display = 'block';
+    document.getElementById('question-box').style.display = 'none';
+    document.getElementById('restart-button').style.display = 'block';
     
+    
+
 }
 
 
@@ -136,7 +147,9 @@ function correctAnswerCounter() {
 startEl.addEventListener('click', function(){
     timer()
     startQuiz()
+    
 });
+
 
 /*get all the high score out of all local storage if no high score se it to 0
 select high score element find the text conent of the highest scroe  equal to the value you get from local sotar
