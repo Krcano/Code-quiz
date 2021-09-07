@@ -10,7 +10,10 @@
   
   <body>
     <header>
-        <div id='high-score'>View High Score</div>
+        <div id='high-score'>View High Score
+          <ul id='score-list'></ul>
+        </div>
+
         <div id='timer'>Time: </div>
         <h1 class='intro'>Java Script Quiz</h1>
     </header>
@@ -27,13 +30,15 @@
     <div id='quiz-content'>
 
         <h1 class='quiz-over'>All done!</h1>
-        <form class='quiz-over' action='/action_page.php'>
+        <form class='quiz-over'>
         <label class='quiz-over' for='initials'>Initials</label>
         <input class='quiz-over' type='text' id ='initials' name='initials'>
         <button id='save' class='quiz-over'>Save Score</button>
         <button id='restart-button'>Restart Quiz</button>
         </form>
     </div>
+
+    
 
 
 

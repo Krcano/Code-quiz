@@ -7,6 +7,7 @@ var timerEl = document.getElementById('timer');
 var startEl = document.getElementById('start');
 var restartEl = document.getElementById('restart-button');
 var saveButton = document.getElementById('save');
+var scoreList = document.getElementById('score-list');
 
 var quizQuestions = [ 
     {
@@ -58,6 +59,7 @@ function timer(){
 
     
 }
+
 
 var currentQuestion=0;
 
@@ -111,7 +113,7 @@ var quizOverEl = document.querySelectorAll('#quiz-content');
 function quizOver(){
     document.getElementById('quiz-content').style.display = 'block';
     document.getElementById('question-box').style.display = 'none';
-    // document.getElementById('restart-button').style.display = 'block'; DOESNT WORK
+    document.getElementById('restart-button').style.display = 'block'; 
     
 }
 
@@ -122,16 +124,26 @@ var gradeScore = {
     name: userName.value,
     grade: scoreCounter,
 };
-window.localStorage.setItem('gradeScore', JSON.stringify(gradeScore));
+var storageSaves = JSON.parse(localStorage.getItem('gradeScore'));
+if(storageSaves.length > 0){
+    storageSaves.push(gradeScore)
+} else{
+    storageSaves = [gradeScore];
+}
+window.localStorage.setItem('gradeScore', JSON.stringify(storageSaves));
 }
 
+// translates the grade the local storage
 function renderGrade(){
     var lastGrade = JSON.parse(localStorage.getItem('gradeScore'));
     if(lastGrade !== null){
-        document.getElementById('initials').innerHTML = lastGrade.name;
-       
-        document.getElementById('highScore').innerHTML = lastGrade.grade;
-                       // causing and unknown error ^ 
+        scoreList.innerHTML='';
+        for (let i = 0; i < lastGrade.length; i++) {
+            var score= lastGrade[i]
+            var li = document.createElement('li');
+            li.textContent = ` initials: ${score.name} score: ${score.grade}` ;
+            scoreList.appendChild(li);
+        }
     } else{
         return;
     }
@@ -140,9 +152,18 @@ function renderGrade(){
 
 
 
-// restartEl.addEventListener('click', function(){
-//     startQuiz();
-// })
+
+// All event listeners
+highScore.addEventListener('click', function(){
+    renderGrade();
+})
+
+
+restartEl.addEventListener('click', function(){
+    currentQuestion = 0;
+    timeLeft = 60;
+    startQuiz();
+})
 saveButton.addEventListener('click', function(event){
     event.preventDefault();
    saveGrade();
@@ -156,59 +177,3 @@ startEl.addEventListener('click', function(){
 });
 
 
-// function init(){
-//     renderGrade();
-// }
-// init();
-
-
-
-
-
-
-
-
-
-
-// function setScore(){
-//     highScore.textContent = scoreCounter;
-//     localStorage.setItem('scoreCount', scoreCounter);
-// }
-// setScore();
-
-
-
-
-
-// // get score from client sotrage if it exists
-// function correctAnswerCounter() {
-//     var storedCorrect = localStorage.getItem('scoreCount');
-//     if(storedCorrect === null){
-//         scoreCounter=0;
-//     } else{
-//         scoreCounter= storedCorrect;
-//     }
-// }
-
-
-
-
-// document.addEventListener('click', startQuiz);
-
-
-
-/*get all the high score out of all local storage if no high score se it to 0
-select high score element find the text conent of the highest scroe  equal to the value you get from local sotar
-click on save score button rtrieve values from local storage, should be an array of objects and each should have key of score and key of name 
-adding objects to arrays and adding data to an object with a key of score name*/
-
-// localStorage.push({
-//     name: variable of name that user entered,
-//     score: scoreCounter,
-
-// })
-// get the user name 
-    // give option to save score
-    // restart the quiz
-    // header enter name, button to save score,text box to enter name, button to restart
-    // create a div called quiz for all the quiz and set the display to none and set quiz over div display inline
