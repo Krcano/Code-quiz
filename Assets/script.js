@@ -2,7 +2,7 @@
 var questionsBox = document.querySelector('#question-box');
 var highScore = document.getElementById('high-score')
 var scoreCounter = 0
-var timeLeft = 60;
+var timeLeft = 30;
 var timerEl = document.getElementById('timer');
 var startEl = document.getElementById('start');
 var restartEl = document.getElementById('restart-button');
@@ -53,6 +53,9 @@ function timer(){
         if ( timeLeft < 0) {
             clearInterval(timeInterval);
             timer=60;
+         }
+         if(timeLeft <= 0){
+             quizOver();
          }
          
     }, 1000);
@@ -119,11 +122,15 @@ function quizOver(){
 
 // saves score to local storage
 function saveGrade(){
+   
 var userName = document.getElementById('initials') ;
 var gradeScore = {
     name: userName.value,
     grade: scoreCounter,
-};
+}; 
+var gradesaver = localStorage.setItem('gradeScore', JSON.stringify(gradeScore));
+// localStorage.setItem('gradeScore', JSON.stringify(gradeScore)); THIS IS WHAT IM TRYING TO FIGURE OUT k
+
 var storageSaves = JSON.parse(localStorage.getItem('gradeScore'));
 if(storageSaves.length > 0){
     storageSaves.push(gradeScore)
@@ -141,14 +148,14 @@ function renderGrade(){
         for (let i = 0; i < lastGrade.length; i++) {
             var score= lastGrade[i]
             var li = document.createElement('li');
-            li.textContent = ` initials: ${score.name} score: ${score.grade}` ;
+            li.textContent = `  ${score.name} score: ${score.grade}` ;
             scoreList.appendChild(li);
         }
     } else{
         return;
     }
     
-} console.log(JSON.parse(localStorage.getItem('gradeScore')));
+} console.log(localStorage.getItem('storageSaves'));
 
 
 
