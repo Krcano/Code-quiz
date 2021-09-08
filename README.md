@@ -1,12 +1,14 @@
 # Code-quiz
 
 ## Description
-This project is a timed quiz about the fundamentals of Javascript. It is 6 questions long and it gives you 1 minute to complete. This quiz allows the user to click on a question and if it is the correct answer it will provide you with the next question but if you choose the incorrect answer it deducts 10 seconds off your timer. Ath the end of rth e quiz it will allow you to input your initials and save your score. I learned a lot about how to create elements dynamically using Javascript, starting a timer function, and how to go through an array of questions using a for loop. I had a lot of trouble with my highscore list using local storage and and the scores add on but in the end the hard work was worth it.
+This project is a timed quiz about the fundamentals of Javascript. It is 6 questions long and it gives you 1 minute to complete. This quiz allows the user to click on a question and if it is the correct answer it will provide you with the next question but if you choose the incorrect answer it deducts 10 seconds off your timer. At the end of the quiz it will allow you to input your initials and save your score. I learned a lot about how to create elements dynamically using Javascript, starting a timer function, and how to go through an array of questions using a for loop. I had a lot of trouble with my highscore list using local storage and and the scores add on but in the end the hard work was worth it.
 
 ## Usage
-To get started, you will press the start quiz button and it immediately starts the timer and the quiz questions follow. After you finish the quiz or if the timer timer ends before you do, you can save and view your score. You will then be given the option to restart the quiz if you'd like.
+To get started, you will press the start quiz button and it immediately starts the timer and the quiz questions follow. After you finish the quiz or if the timer timer ends before you finish, you can save and view your score. You will then be given the option to restart the quiz if you'd like.
 
 ![My Quiz](./Assets/screenshot.png)
+
+[livesite](https://krcano.github.io/Code-quiz/)
 
 
 ## MIT License

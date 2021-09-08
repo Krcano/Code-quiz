@@ -2,7 +2,7 @@
 var questionsBox = document.querySelector('#question-box');
 var highScore = document.getElementById('high-score')
 var scoreCounter = 0
-var timeLeft = 30;
+var timeLeft = 60;
 var timerEl = document.getElementById('timer');
 var startEl = document.getElementById('start');
 var restartEl = document.getElementById('restart-button');
@@ -74,7 +74,6 @@ var introBox = document.querySelector('.box');
 introBox.style.display = 'none';
 startEl.style.display = 'none';
 
-
 // clears the previous question from page
 questionsBox.innerHTML ='';
 var question = quizQuestions[currentQuestion];
@@ -97,18 +96,15 @@ for(var i=0; i < question.possibleAnswers.length; i++) {
             startQuiz();
         }else{
             quizOver();
-        }
-        // console.log(this.textContent)
-        
+        }      
     } )
 
     questionAnswer.textContent = question.possibleAnswers[i];
     questionsBox.appendChild(questionAnswer);
 }
-
-currentQuestion++;
-    
+currentQuestion++;   
 } 
+
 
 // showing end of quiz content
 var quizOverEl = document.querySelectorAll('#quiz-content');
@@ -122,23 +118,22 @@ function quizOver(){
 
 // saves score to local storage
 function saveGrade(){
-   
 var userName = document.getElementById('initials') ;
 var gradeScore = {
     name: userName.value,
     grade: scoreCounter,
 }; 
-var gradesaver = localStorage.setItem('gradeScore', JSON.stringify(gradeScore));
-// localStorage.setItem('gradeScore', JSON.stringify(gradeScore)); THIS IS WHAT IM TRYING TO FIGURE OUT k
 
-var storageSaves = JSON.parse(localStorage.getItem('gradeScore'));
-if(storageSaves.length > 0){
-    storageSaves.push(gradeScore)
+if(localStorage.getItem('gradeScore') !== null){
+    var storageSaves = JSON.parse(localStorage.getItem('gradeScore'));
+    storageSaves.push(gradeScore);
+    localStorage.setItem('gradeScore', JSON.stringify(storageSaves));
 } else{
-    storageSaves = [gradeScore];
+    var storageArray = [gradeScore]
+    localStorage.setItem('gradeScore', JSON.stringify(storageArray));
 }
-window.localStorage.setItem('gradeScore', JSON.stringify(storageSaves));
 }
+
 
 // translates the grade the local storage
 function renderGrade(){
@@ -155,7 +150,7 @@ function renderGrade(){
         return;
     }
     
-} console.log(localStorage.getItem('storageSaves'));
+} 
 
 
 
@@ -172,7 +167,7 @@ restartEl.addEventListener('click', function(){
     startQuiz();
 })
 saveButton.addEventListener('click', function(event){
-    event.preventDefault();
+   event.preventDefault();
    saveGrade();
    renderGrade();
 
