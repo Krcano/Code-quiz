@@ -154,7 +154,6 @@ function renderGrade(){
 
 
 
-
 // All event listeners
 highScore.addEventListener('click', function(){
     renderGrade();
